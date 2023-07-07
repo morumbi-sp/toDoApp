@@ -7,19 +7,19 @@ export const dummyList = [
       {
         id: 'w01',
         contents: 'Call to Elon Musk',
-        star: false,
+        star: true,
         complete: false,
       },
       {
         id: 'w02',
         contents: 'Zoom with client',
-        star: false,
+        star: true,
         complete: false,
       },
       {
         id: 'w03',
         contents: 'Meeting with designers',
-        star: false,
+        star: true,
         complete: false,
       },
       {
@@ -32,19 +32,19 @@ export const dummyList = [
         id: 'w05',
         contents: 'Submit expenses',
         star: false,
-        complete: true,
+        complete: false,
       },
       {
         id: 'w06',
         contents: 'Book flight ticket',
         star: false,
-        complete: true,
+        complete: false,
       },
       {
         id: 'w07',
         contents: 'Finish weekly report',
         star: false,
-        complete: true,
+        complete: false,
       },
       {
         id: 'w08',
@@ -72,6 +72,36 @@ export const dummyList = [
       },
       {
         id: 'w12',
+        contents: 'Clean my desk',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w13',
+        contents: 'Clean my desk',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w14',
+        contents: 'Submit expenses',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w15',
+        contents: 'Book flight ticket',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w16',
+        contents: 'Finish weekly report',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w17',
         contents: 'Clean my desk',
         star: false,
         complete: true,

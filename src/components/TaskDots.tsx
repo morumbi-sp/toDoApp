@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default function TaskDots({ numberOfAll, numberOfCompleted }: Props) {
-  const completedArray = Array.from({ length: numberOfCompleted });
   const allArray = Array.from({ length: numberOfAll });
   return (
     <View>
@@ -14,7 +13,9 @@ export default function TaskDots({ numberOfAll, numberOfCompleted }: Props) {
         <Text className='text-[25px] font-semibold text-white'>
           {numberOfCompleted} / {numberOfAll}
         </Text>
-        <Text className='ml-2 text-[15px] text-white'>tasks</Text>
+        <Text className='ml-2 text-[16px] mb-[2px] text-white font-semibold'>
+          tasks
+        </Text>
       </View>
       <View className='flex-row items-end w-full flex-wrap'>
         {allArray.map((_, index) => (
