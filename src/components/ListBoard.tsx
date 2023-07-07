@@ -4,11 +4,15 @@ import { IList } from '@src/lib/type';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
   FlatList,
+  Pressable,
   ScrollView,
   ScrollViewComponent,
   Text,
   View,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { Octicons } from '@expo/vector-icons';
 
 interface Props {
   numberOfCompleted: number;
@@ -27,6 +31,12 @@ export default function ListBoard({
   );
   const completeList = list.list.filter((item) => item.complete === true);
 
+  const [showCompleted, setShowCompleted] = useState(false);
+
+  const toggleShowCompleted = () => {
+    setShowCompleted((prev) => !prev);
+  };
+
   return (
     <LinearGradient
       colors={[list.bgColor, `rgba(${hexToRgb(list.bgColor)}, 0.15)`]}
@@ -34,7 +44,7 @@ export default function ListBoard({
       end={{ x: 0.5, y: 0.3 }}
       className='h-full rounded-2xl shadow-md pt-7 px-5 bg-white'
     >
-      <View className='ml-[3.5px]'>
+      <View className='ml-[4px] mb-5'>
         <Text className='text-[38px] font-bold text-white'>
           {list.category}
         </Text>
@@ -55,10 +65,27 @@ export default function ListBoard({
           </View>
         </View>
       </View>
-      <ScrollView className='pt-7 -ml-[2px]'>
+      <ScrollView
+        className='pt-3 -ml-[2px] mb-3'
+        showsVerticalScrollIndicator={false}
+      >
         <ListContents themeColor={list.bgColor} list={starList} />
         <ListContents themeColor={list.bgColor} list={incompleteList} />
-        <ListContents themeColor={list.bgColor} list={completeList} />
+        <View className='mb-3 mt-1 flex-row justify-between mx-1 items-center'>
+          <Text className='text-[12px] text-gray-700'>
+            COMPLETED ({numberOfCompleted})
+          </Text>
+          <Pressable onPress={toggleShowCompleted} className='mr-5'>
+            {showCompleted ? (
+              <Octicons name='chevron-down' size={22} color='gray' />
+            ) : (
+              <Octicons name='chevron-left' size={22} color='gray' />
+            )}
+          </Pressable>
+        </View>
+        {showCompleted && (
+          <ListContents themeColor={list.bgColor} list={completeList} />
+        )}
       </ScrollView>
     </LinearGradient>
   );
