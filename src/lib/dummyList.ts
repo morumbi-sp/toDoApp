@@ -1,7 +1,8 @@
 export const dummyList = [
   {
+    id: 'w',
     category: 'Work',
-    bgColor: 'FFA801',
+    bgColor: '#FFA801',
     list: [
       {
         id: 'w01',
@@ -31,25 +32,104 @@ export const dummyList = [
         id: 'w05',
         contents: 'Submit expenses',
         star: false,
-        complete: false,
+        complete: true,
       },
       {
         id: 'w06',
         contents: 'Book flight ticket',
         star: false,
-        complete: false,
+        complete: true,
       },
       {
         id: 'w07',
         contents: 'Finish weekly report',
         star: false,
-        complete: false,
+        complete: true,
       },
       {
         id: 'w08',
         contents: 'Clean my desk',
         star: false,
+        complete: true,
+      },
+      {
+        id: 'w09',
+        contents: 'Submit expenses',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w10',
+        contents: 'Book flight ticket',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w11',
+        contents: 'Finish weekly report',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 'w12',
+        contents: 'Clean my desk',
+        star: false,
+        complete: true,
+      },
+    ],
+  },
+  {
+    id: 's',
+    category: 'Shopping',
+    bgColor: '#575FCF',
+    list: [
+      {
+        id: 's01',
+        contents: 'Call to Elon Musk',
+        star: false,
         complete: false,
+      },
+      {
+        id: 's02',
+        contents: 'Zoom with client',
+        star: false,
+        complete: false,
+      },
+      {
+        id: 's03',
+        contents: 'Meeting with designers',
+        star: false,
+        complete: false,
+      },
+      {
+        id: 's04',
+        contents: 'Lunch with Boss',
+        star: false,
+        complete: false,
+      },
+      {
+        id: 's05',
+        contents: 'Submit expenses',
+        star: false,
+        complete: false,
+      },
+      {
+        id: 's06',
+        contents: 'Book flight ticket',
+        star: false,
+        complete: false,
+      },
+      {
+        id: 's07',
+        contents: 'Finish weekly report',
+        star: false,
+        complete: true,
+      },
+      {
+        id: 's08',
+        contents: 'Clean my desk',
+        star: false,
+        complete: true,
       },
     ],
   },
