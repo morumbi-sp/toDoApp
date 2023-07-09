@@ -6,10 +6,11 @@ import List from '@src/screens/List';
 import Edit from '@src/screens/Edit';
 import { IList } from '@src/lib/type';
 import * as Device from 'expo-device';
+import ListContextProvider from '@src/context/listContext';
 
 export type RootParamList = {
   Home: undefined;
-  List: { list: IList; numberOfAll: number; numberOfCompleted: number };
+  List: { category: string; numberOfAll: number; numberOfCompleted: number };
   Edit: undefined;
 };
 
@@ -17,21 +18,23 @@ const Stack = createNativeStackNavigator<RootParamList>();
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <ListContextProvider>
       <StatusBar style='auto' />
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-          contentStyle: {
-            paddingHorizontal: 12,
-            paddingVertical: Device.osName === 'iOS' ? 90 : 70,
-          },
-        }}
-      >
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='List' component={List} />
-        <Stack.Screen name='Edit' component={Edit} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              paddingHorizontal: 12,
+              paddingVertical: Device.osName === 'iOS' ? 90 : 70,
+            },
+          }}
+        >
+          <Stack.Screen name='Home' component={Home} />
+          <Stack.Screen name='List' component={List} />
+          <Stack.Screen name='Edit' component={Edit} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ListContextProvider>
   );
 }
