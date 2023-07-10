@@ -46,7 +46,13 @@ export default function ItemDot({ themeColor, item }: Props) {
         )}
       </Pressable>
       {slideMenuVisible && (
-        <Animated.View style={{ marginLeft: slideAnim }} className='flex-row'>
+        <Animated.View
+          style={{
+            marginRight: slideAnim,
+            transform: [{ translateX: slideAnim }],
+          }}
+          className='flex-row'
+        >
           <ItemDotSlideMenu themeColor={themeColor} item={item} />
         </Animated.View>
       )}

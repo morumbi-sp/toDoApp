@@ -16,6 +16,7 @@ export default function Category({ item, onPress }: Props) {
   const numberOfCompleted = item.list.filter(
     (item) => item.complete === true
   ).length;
+
   return (
     <Pressable onPress={() => onPress(item, numberOfAll, numberOfCompleted)}>
       <View
