@@ -32,22 +32,16 @@ export default function InputItem({
     toggleAddMode(false);
   };
   return (
-    <KeyboardAvoidingView
-      keyboardVerticalOffset={-200}
-      behavior='padding'
-      style={{ flex: 1 }}
-    >
-      <View className='flex-row mb-5 items-center'>
-        <ItemDot themeColor={themeColor} />
-        <TextInput
-          autoCorrect={false}
-          autoFocus
-          ref={inputRef}
-          className='text-[16px]'
-          onChangeText={setInputValues}
-          onSubmitEditing={handleSubmit}
-        />
-      </View>
-    </KeyboardAvoidingView>
+    <View className='flex-row mb-5 items-center'>
+      <ItemDot themeColor={themeColor} />
+      <TextInput
+        autoCorrect={false}
+        autoFocus
+        ref={inputRef}
+        className='text-[16px]'
+        onChangeText={setInputValues}
+        onSubmitEditing={handleSubmit}
+      />
+    </View>
   );
 }
