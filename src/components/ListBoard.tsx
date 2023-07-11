@@ -1,37 +1,27 @@
 import ListContents from '@src/components/ListContents';
 import hexToRgb from '@src/lib/hexToRgb';
-import { IList } from '@src/lib/type';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
-  FlatList,
   KeyboardAvoidingView,
+  Platform,
   Pressable,
   ScrollView,
-  ScrollViewComponent,
   Text,
   View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useContext, useState } from 'react';
 import { Octicons } from '@expo/vector-icons';
-import AddItem from '@src/components/AddItemBtn';
 import AddItemBtn from '@src/components/AddItemBtn';
 import InputItem from '@src/components/InputItem';
 import { ListContext } from '@src/context/listContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface Props {
-  numberOfCompleted: number;
-  numberOfAll: number;
   category: string;
 }
 
-export default function ListBoard({
-  numberOfCompleted,
-  numberOfAll,
-  category,
-}: Props) {
-  const [showCompleted, setShowCompleted] = useState(false);
+export default function ListBoard({ category }: Props) {
+  const [showCompleted, setShowCompleted] = useState(true);
   const [addItemMode, setAddItemMode] = useState(false);
   const listCtx = useContext(ListContext);
   const thisList = listCtx.list.filter((item) => item.category === category)[0];
@@ -42,6 +32,10 @@ export default function ListBoard({
     (item) => item.complete === false && item.star === false
   );
   const completeList = thisList.list.filter((item) => item.complete === true);
+
+  const numberOfCompleted = completeList.length;
+  const numberOfAll =
+    numberOfCompleted + incompleteList.length + starList.length;
 
   const toggleShowCompleted = () => {
     setShowCompleted((prev) => !prev);
@@ -80,46 +74,45 @@ export default function ListBoard({
         </View>
       </View>
 
-      <ScrollView
+      <KeyboardAwareScrollView
         className='pt-3 -ml-[2px] mb-3'
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 200 }}
       >
-        <KeyboardAwareScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
-          keyboardShouldPersistTaps='handled'
-          style={{ flex: 1 }}
-        >
-          <ListContents themeColor={thisList.bgColor} list={starList} />
-          <ListContents themeColor={thisList.bgColor} list={incompleteList} />
-          {addItemMode && (
-            <InputItem
-              themeColor={thisList.bgColor}
-              category={thisList.category}
-              toggleAddMode={setAddItemMode}
-            />
-          )}
-          <View className='mb-3 mt-1 flex-row justify-between mx-1 items-center'>
-            <Text className='text-[12px] text-gray-700'>
-              COMPLETED ({numberOfCompleted})
-            </Text>
-            <Pressable onPress={toggleShowCompleted} className='mr-5'>
-              {showCompleted ? (
-                <Octicons name='chevron-down' size={22} color='gray' />
-              ) : (
-                <Octicons name='chevron-left' size={22} color='gray' />
-              )}
-            </Pressable>
-          </View>
-          {showCompleted && (
-            <ListContents themeColor={thisList.bgColor} list={completeList} />
-          )}
-        </KeyboardAwareScrollView>
-      </ScrollView>
+        <ListContents themeColor={thisList.bgColor} list={starList} />
+        <ListContents themeColor={thisList.bgColor} list={incompleteList} />
+        {addItemMode && (
+          <InputItem
+            themeColor={thisList.bgColor}
+            category={thisList.category}
+            toggleAddMode={setAddItemMode}
+          />
+        )}
 
-      <Pressable className='absolute bottom-6 right-3' onPress={addItemHandler}>
-        <AddItemBtn themeColor={thisList.bgColor} />
-      </Pressable>
+        <View className='mb-3 mt-1 flex-row justify-between mx-1 items-center'>
+          <Text className='text-[12px] text-gray-700'>
+            COMPLETED ({numberOfCompleted})
+          </Text>
+          <Pressable onPress={toggleShowCompleted} className='mr-5'>
+            {showCompleted ? (
+              <Octicons name='chevron-down' size={22} color='gray' />
+            ) : (
+              <Octicons name='chevron-left' size={22} color='gray' />
+            )}
+          </Pressable>
+        </View>
+        {showCompleted && (
+          <ListContents themeColor={thisList.bgColor} list={completeList} />
+        )}
+      </KeyboardAwareScrollView>
+      {!addItemMode && (
+        <Pressable
+          className='absolute bottom-6 right-3'
+          onPress={addItemHandler}
+        >
+          <AddItemBtn themeColor={thisList.bgColor} />
+        </Pressable>
+      )}
     </LinearGradient>
   );
 }

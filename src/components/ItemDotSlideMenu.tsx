@@ -3,8 +3,9 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { IItem } from '@src/lib/type';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ListContext } from '@src/context/listContext';
+import EditModal from '@src/components/EditModal';
 
 interface Props {
   themeColor: string;
@@ -23,7 +24,7 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
   };
 
   const toggleCompletedHandler = () => {
-    const newItem = { ...item, complete: !item.complete };
+    const newItem = { ...item, complete: !item.complete, star: false };
     listCtx.editList(newItem, item.id, getCategory());
   };
 
@@ -33,7 +34,7 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
   };
 
   return (
-    <View className='flex-row'>
+    <View className='flex-row -ml-[40px]'>
       <Pressable className='mr-[15px]' onPress={toggleCompletedHandler}>
         <View
           className='h-[33px] aspect-square rounded-full border-2 mr-3 '
@@ -68,7 +69,7 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
         </View>
       </Pressable>
 
-      <View>
+      <Pressable>
         <View
           className='h-[32px] aspect-square rounded-full border-2 mr-3 '
           style={{
@@ -79,7 +80,7 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
         <View style={{ position: 'absolute', left: 4, top: 3 }}>
           <MaterialIcons name='mode-edit' size={24} color='white' />
         </View>
-      </View>
+      </Pressable>
     </View>
   );
 }

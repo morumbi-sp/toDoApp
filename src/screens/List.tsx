@@ -11,7 +11,7 @@ type NProps = NativeStackScreenProps<RootParamList, 'List'>;
 interface Props extends NProps {}
 
 export default function List({ navigation, route }: Props) {
-  const { category, numberOfAll, numberOfCompleted } = route.params;
+  const { category } = route.params;
 
   return (
     <>
@@ -23,11 +23,7 @@ export default function List({ navigation, route }: Props) {
           <Text className='text-[16px] font-bold'>EDIT</Text>
         </Pressable>
       </View>
-      <ListBoard
-        category={category}
-        numberOfAll={numberOfAll}
-        numberOfCompleted={numberOfCompleted}
-      />
+      <ListBoard category={category} />
     </>
   );
 }
