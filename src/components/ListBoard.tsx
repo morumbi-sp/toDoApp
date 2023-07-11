@@ -45,6 +45,14 @@ export default function ListBoard({ category }: Props) {
     setAddItemMode(true);
   };
 
+  const getCategory = (): string => {
+    const parentList = listCtx.list.find(
+      (listItem) =>
+        listItem.list.findIndex((listItem) => listItem.id === item.id) !== -1
+    );
+    return parentList?.category || '';
+  };
+
   return (
     <LinearGradient
       colors={[thisList.bgColor, boardBgColor]}

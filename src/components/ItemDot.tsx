@@ -2,9 +2,12 @@ import { IItem } from '@src/lib/type';
 import { Pressable, Text, View, Animated } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ItemDotSlideMenu from '@src/components/ItemDotSlideMenu';
 import OutsidePressHandler from 'react-native-outside-press';
+import InputItem from '@src/components/InputItem';
+import { ListContext } from '@src/context/listContext';
+import EditItem from '@src/components/EditItem';
 
 interface Props {
   themeColor: string;
@@ -13,7 +16,18 @@ interface Props {
 
 export default function ItemDot({ themeColor, item }: Props) {
   const [slideMenuVisible, setSlideMenuVisible] = useState(false);
+  const [editItemMode, setEditItemMode] = useState(false);
   const slideAnim = useState(new Animated.Value(0))[0];
+
+  const listCtx = useContext(ListContext);
+
+  const getCategory = (): string => {
+    const parentList = listCtx.list.find(
+      (listItem) =>
+        listItem.list.findIndex((listItem) => listItem.id === item.id) !== -1
+    );
+    return parentList?.category || '';
+  };
 
   const pressDotHandler = () => {
     setSlideMenuVisible(!slideMenuVisible);
@@ -21,6 +35,10 @@ export default function ItemDot({ themeColor, item }: Props) {
       toValue: slideMenuVisible ? 0 : 100,
       useNativeDriver: false,
     }).start();
+  };
+
+  const editItemHandler = () => {
+    setEditItemMode(true);
   };
 
   return (
@@ -58,15 +76,22 @@ export default function ItemDot({ themeColor, item }: Props) {
             }}
             className='flex-row'
           >
-            {/* <OutsidePressHandler onOutsidePress={pressDotHandler}> */}
             <ItemDotSlideMenu themeColor={themeColor} item={item} />
-            {/* </OutsidePressHandler> */}
           </Animated.View>
         )}
         {item && (
           <Animated.View style={{ transform: [{ translateX: slideAnim }] }}>
-            <Pressable>
-              <Text style={{ fontSize: 16 }}>{item?.contents}</Text>
+            <Pressable onPress={editItemHandler}>
+              {editItemMode ? (
+                <EditItem
+                  themeColor={themeColor}
+                  category={getCategory()}
+                  toggleAddMode={setEditItemMode}
+                  item={item}
+                />
+              ) : (
+                <Text style={{ fontSize: 16 }}>{item?.contents}</Text>
+              )}
             </Pressable>
           </Animated.View>
         )}
