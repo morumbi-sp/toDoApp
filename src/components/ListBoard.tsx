@@ -78,11 +78,7 @@ export default function ListBoard({ category }: Props) {
         <ListContents list={starList} />
         <ListContents list={incompleteList} />
         {addItemMode && (
-          <InputItem
-            themeColor={category.bgColor}
-            category={category.title}
-            toggleAddMode={setAddItemMode}
-          />
+          <InputItem category={category} toggleAddMode={setAddItemMode} />
         )}
 
         <View className='mb-3 mt-1 flex-row justify-between mx-1 items-center'>

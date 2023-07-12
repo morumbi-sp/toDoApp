@@ -1,20 +1,16 @@
 import ItemDot from '@src/components/ItemDot';
 import { ListContext } from '@src/context/listContext';
+import { ICategory } from '@src/lib/type';
 import { useContext, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import uuid from 'react-native-uuid';
 
 interface Props {
-  themeColor: string;
-  category: string;
+  category: ICategory;
   toggleAddMode: (prevState: boolean) => void;
 }
 
-export default function InputItem({
-  themeColor,
-  category,
-  toggleAddMode,
-}: Props) {
+export default function InputItem({ category, toggleAddMode }: Props) {
   const inputRef = useRef<TextInput>(null);
   const [inputValues, setInputValues] = useState('');
   const listCtx = useContext(ListContext);
@@ -28,14 +24,16 @@ export default function InputItem({
         contents: inputValues,
         star: false,
         complete: false,
+        category: category.title,
+        bgColor: category.bgColor,
       };
-      listCtx.addList(newItem, category);
+      listCtx.addList(newItem);
       toggleAddMode(false);
     }
   };
   return (
     <View className='flex-row items-center mb-4'>
-      <ItemDot themeColor={themeColor} />
+      <ItemDot category={category} />
       <TextInput
         autoCorrect={false}
         autoFocus

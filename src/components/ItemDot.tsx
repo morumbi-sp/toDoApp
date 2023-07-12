@@ -1,4 +1,4 @@
-import { IList } from '@src/lib/type';
+import { ICategory, IList } from '@src/lib/type';
 import { Pressable, Text, View, Animated } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
@@ -9,9 +9,10 @@ import EditItem from '@src/components/EditItem';
 
 interface Props {
   item?: IList;
+  category?: ICategory;
 }
 
-export default function ItemDot({ item }: Props) {
+export default function ItemDot({ item, category }: Props) {
   const [slideMenuVisible, setSlideMenuVisible] = useState(false);
   const [editItemMode, setEditItemMode] = useState(false);
   const slideAnim = useState(new Animated.Value(0))[0];
@@ -40,7 +41,7 @@ export default function ItemDot({ item }: Props) {
           <View
             className='h-[25px] aspect-square rounded-full border-2 mr-3 '
             style={{
-              borderColor: item?.bgColor,
+              borderColor: item?.bgColor || category?.bgColor,
               backgroundColor: item?.complete ? item?.bgColor : 'none',
             }}
           />
