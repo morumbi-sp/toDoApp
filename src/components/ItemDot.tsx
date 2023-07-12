@@ -1,32 +1,20 @@
-import { IItem } from '@src/lib/type';
+import { IList } from '@src/lib/type';
 import { Pressable, Text, View, Animated } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import ItemDotSlideMenu from '@src/components/ItemDotSlideMenu';
 import OutsidePressHandler from 'react-native-outside-press';
-import { ListContext } from '@src/context/listContext';
 import EditItem from '@src/components/EditItem';
 
 interface Props {
-  themeColor: string;
-  item?: IItem;
+  item?: IList;
 }
 
-export default function ItemDot({ themeColor, item }: Props) {
+export default function ItemDot({ item }: Props) {
   const [slideMenuVisible, setSlideMenuVisible] = useState(false);
   const [editItemMode, setEditItemMode] = useState(false);
   const slideAnim = useState(new Animated.Value(0))[0];
-
-  const listCtx = useContext(ListContext);
-
-  const getCategory = (): string => {
-    const parentList = listCtx.list.find(
-      (listItem) =>
-        listItem.list.findIndex((listItem) => listItem.id === item?.id) !== -1
-    );
-    return parentList?.category || '';
-  };
 
   const pressDotHandler = () => {
     setSlideMenuVisible(!slideMenuVisible);
@@ -52,13 +40,13 @@ export default function ItemDot({ themeColor, item }: Props) {
           <View
             className='h-[25px] aspect-square rounded-full border-2 mr-3 '
             style={{
-              borderColor: themeColor,
-              backgroundColor: item?.complete ? themeColor : 'none',
+              borderColor: item?.bgColor,
+              backgroundColor: item?.complete ? item?.bgColor : 'none',
             }}
           />
           {item?.star && (
             <View style={{ position: 'absolute', left: 4.5, top: 4 }}>
-              <FontAwesome name='star' size={17} color={themeColor} />
+              <FontAwesome name='star' size={17} color={item?.bgColor} />
             </View>
           )}
           {item?.complete && (
@@ -75,18 +63,14 @@ export default function ItemDot({ themeColor, item }: Props) {
             }}
             className='flex-row'
           >
-            <ItemDotSlideMenu themeColor={themeColor} item={item} />
+            <ItemDotSlideMenu item={item} />
           </Animated.View>
         )}
         {item && (
           <Animated.View style={{ transform: [{ translateX: slideAnim }] }}>
             <Pressable onPress={editItemHandler} hitSlop={{ right: 70 }}>
               {editItemMode ? (
-                <EditItem
-                  category={getCategory()}
-                  toggleAddMode={setEditItemMode}
-                  item={item}
-                />
+                <EditItem toggleAddMode={setEditItemMode} item={item} />
               ) : (
                 <Text style={{ fontSize: 16 }}>{item?.contents}</Text>
               )}

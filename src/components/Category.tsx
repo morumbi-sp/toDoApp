@@ -4,12 +4,12 @@ import { Pressable, Text, View } from 'react-native';
 
 interface Props {
   item: ICategory;
+  onPress: (item: ICategory) => void;
 }
 
-export default function Category({ item }: Props) {
-  const onPressHandler = () => {};
+export default function Category({ item, onPress }: Props) {
   return (
-    <Pressable onPress={onPressHandler}>
+    <Pressable onPress={() => onPress(item)}>
       <View
         className='h-[200px] mb-5 rounded-xl shadow-sm shadow-gray-400 p-5 justify-between'
         style={{

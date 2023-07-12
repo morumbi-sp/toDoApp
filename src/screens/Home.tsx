@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Category from '@src/components/Category';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootParamList } from 'App';
-import { IList } from '@src/lib/type';
+import { ICategory, IList } from '@src/lib/type';
 import { myStyles } from '@src/lib/myStyles';
 import { ListContext } from '@src/context/listContext';
 
@@ -15,6 +15,10 @@ interface Props extends NProps {}
 
 export default function Home({ navigation }: Props) {
   const [category, setCategory] = useState(dummyCategory);
+
+  const onPressHandler = (item: ICategory) => {
+    navigation.navigate('List', { category: item });
+  };
 
   return (
     <>
@@ -32,7 +36,7 @@ export default function Home({ navigation }: Props) {
         keyExtractor={(element) => element.Id}
         contentContainerStyle={{ paddingBottom: 200 }}
         renderItem={({ item }) => {
-          return <Category item={item} />;
+          return <Category item={item} onPress={() => onPressHandler(item)} />;
         }}
       />
     </>

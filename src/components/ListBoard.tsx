@@ -8,27 +8,30 @@ import AddItemBtn from '@src/components/AddItemBtn';
 import InputItem from '@src/components/InputItem';
 import { ListContext } from '@src/context/listContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { ICategory } from '@src/lib/type';
 
 interface Props {
-  category: string;
+  category: ICategory;
 }
 
 export default function ListBoard({ category }: Props) {
   const [showCompleted, setShowCompleted] = useState(true);
   const [addItemMode, setAddItemMode] = useState(false);
-  const listCtx = useContext(ListContext);
-  const thisList = listCtx.list.filter((item) => item.category === category)[0];
-  const boardBgColor = `rgba(${hexToRgb(thisList.bgColor)}, 0.15)`;
 
-  const starList = thisList.list.filter((item) => item.star === true);
-  const incompleteList = thisList.list.filter(
+  const boardBgColor = `rgba(${hexToRgb(category.bgColor)}, 0.15)`;
+
+  const listCtx = useContext(ListContext);
+
+  const thisList = listCtx.AllListOfCategory(category.title);
+  const starList = listCtx.starListOfCategory(category.title);
+  const completeList = listCtx.completedListOfCategory(category.title);
+
+  const incompleteList = thisList.filter(
     (item) => item.complete === false && item.star === false
   );
-  const completeList = thisList.list.filter((item) => item.complete === true);
 
   const numberOfCompleted = completeList.length;
-  const numberOfAll =
-    numberOfCompleted + incompleteList.length + starList.length;
+  const numberOfAll = thisList.length;
 
   const toggleShowCompleted = () => {
     setShowCompleted((prev) => !prev);
@@ -40,14 +43,14 @@ export default function ListBoard({ category }: Props) {
 
   return (
     <LinearGradient
-      colors={[thisList.bgColor, boardBgColor]}
+      colors={[category.bgColor, boardBgColor]}
       start={{ x: 0.5, y: 0.03 }}
       end={{ x: 0.5, y: 0.3 }}
       className='h-full rounded-2xl shadow-md pt-7 px-5 bg-white'
     >
       <View className='ml-[4px] mb-5'>
         <Text className='text-[38px] font-bold text-white'>
-          {thisList.category}
+          {category.title}
         </Text>
         <View className='mt-2.5 flex-row'>
           <View className='h-[50px] border-2 border-white w-[14px] rounded-full justify-end'>
@@ -72,12 +75,12 @@ export default function ListBoard({ category }: Props) {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 200 }}
       >
-        <ListContents themeColor={thisList.bgColor} list={starList} />
-        <ListContents themeColor={thisList.bgColor} list={incompleteList} />
+        <ListContents list={starList} />
+        <ListContents list={incompleteList} />
         {addItemMode && (
           <InputItem
-            themeColor={thisList.bgColor}
-            category={thisList.category}
+            themeColor={category.bgColor}
+            category={category.title}
             toggleAddMode={setAddItemMode}
           />
         )}
@@ -94,16 +97,14 @@ export default function ListBoard({ category }: Props) {
             )}
           </Pressable>
         </View>
-        {showCompleted && (
-          <ListContents themeColor={thisList.bgColor} list={completeList} />
-        )}
+        {showCompleted && <ListContents list={completeList} />}
       </KeyboardAwareScrollView>
       {!addItemMode && (
         <Pressable
           className='absolute bottom-6 right-3'
           onPress={addItemHandler}
         >
-          <AddItemBtn themeColor={thisList.bgColor} />
+          <AddItemBtn themeColor={category.bgColor} />
         </Pressable>
       )}
     </LinearGradient>

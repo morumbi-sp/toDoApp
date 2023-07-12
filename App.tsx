@@ -7,10 +7,11 @@ import Edit from '@src/screens/Edit';
 import * as Device from 'expo-device';
 import ListContextProvider from '@src/context/listContext';
 import { EventProvider } from 'react-native-outside-press';
+import { ICategory } from '@src/lib/type';
 
 export type RootParamList = {
   Home: undefined;
-  List: { category: string; numberOfAll: number; numberOfCompleted: number };
+  List: { category: ICategory };
   Edit: undefined;
 };
 
