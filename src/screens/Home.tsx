@@ -7,7 +7,6 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootParamList } from 'App';
 import { ICategory, IList } from '@src/lib/type';
 import { myStyles } from '@src/lib/myStyles';
-import { ListContext } from '@src/context/listContext';
 
 type NProps = NativeStackScreenProps<RootParamList, 'Home'>;
 
@@ -35,6 +34,7 @@ export default function Home({ navigation }: Props) {
         data={category}
         keyExtractor={(element) => element.Id}
         contentContainerStyle={{ paddingBottom: 200 }}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return <Category item={item} onPress={() => onPressHandler(item)} />;
         }}
