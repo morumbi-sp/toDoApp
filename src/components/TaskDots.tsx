@@ -1,28 +1,32 @@
+import { ListContext } from '@src/context/listContext';
+import { useContext } from 'react';
 import { Text, View } from 'react-native';
 
 interface Props {
-  numberOfAll: number;
-  numberOfCompleted: number;
+  category: string;
 }
 
-export default function TaskDots({ numberOfAll, numberOfCompleted }: Props) {
-  const allArray = Array.from({ length: numberOfAll });
+export default function TaskDots({ category }: Props) {
+  const listCtx = useContext(ListContext);
+  const allList = listCtx.AllListOfCategory(category);
+  const completedList = listCtx.completedListOfCategory(category);
+
   return (
     <View>
       <View className='flex-row items-end'>
         <Text className='text-[25px] font-semibold text-white'>
-          {numberOfCompleted} / {numberOfAll}
+          {completedList.length} / {allList.length}
         </Text>
         <Text className='ml-2 text-[16px] mb-[2px] text-white font-semibold'>
           tasks
         </Text>
       </View>
       <View className='flex-row items-end w-full flex-wrap'>
-        {allArray.map((_, index) => (
+        {Array.from({ length: allList.length }).map((_, index) => (
           <View
             key={index}
             className={` ${
-              index < numberOfCompleted
+              index < completedList.length
                 ? 'bg-white'
                 : 'border-[2px] border-white'
             }  rounded-full w-[5%] aspect-square`}

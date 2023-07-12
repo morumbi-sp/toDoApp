@@ -1,5 +1,5 @@
 import { dummyList } from '@src/lib/dummyList';
-import { IItem, IList } from '@src/lib/type';
+import { IList } from '@src/lib/type';
 import { ReactNode, createContext, useState } from 'react';
 import { Text, View } from 'react-native';
 
@@ -8,70 +8,59 @@ interface Props {
 }
 
 interface IListContext {
-  list: IList[];
-  addList: (item: IItem, category: string) => void;
-  deleteList: (id: string, category: string) => void;
-  editList: (newItem: IItem, id: string, category: string) => void;
+  lists: IList[];
+  AllListOfCategory: (category: string) => IList[];
+  completedListOfCategory: (category: string) => IList[];
+  starListOfCategory: (category: string) => IList[];
+  addList: (newItem: IList) => void;
+  deleteList: (id: string) => void;
+  editList: (newItem: IList, id: string) => void;
 }
 
 export const ListContext = createContext<IListContext>({
-  list: [],
+  lists: [],
+  AllListOfCategory: () => [],
+  completedListOfCategory: () => [],
+  starListOfCategory: () => [],
   addList: () => {},
   deleteList: () => {},
   editList: () => {},
 });
 
 export default function ListContextProvider({ children }: Props) {
-  const [list, setList] = useState(dummyList);
+  const [lists, setLists] = useState(dummyList);
 
-  const addList = (item: IItem, category: string) => {
-    setList((prev) =>
-      prev.map((listItem) => {
-        if (listItem.category === category)
-          return {
-            ...listItem,
-            list: [...listItem.list, item],
-          };
-        return listItem;
-      })
-    );
+  const AllListOfCategory = (category: string) =>
+    lists.filter((element) => element.category === category);
+
+  const completedListOfCategory = (category: string) =>
+    AllListOfCategory(category).filter((element) => element.complete === true);
+
+  const starListOfCategory = (category: string) =>
+    AllListOfCategory(category).filter((element) => element.star === true);
+
+  const addList = (newItem: IList) => {
+    setLists((prev) => [...prev, newItem]);
   };
 
-  const deleteList = (id: string, category: string) => {
-    setList((prev) =>
-      prev.map((listItem) => {
-        if (listItem.category === category) {
-          const updatedList = listItem.list.filter((item) => item.id !== id);
-          return {
-            ...listItem,
-            list: updatedList,
-          };
-        }
-        return listItem;
-      })
-    );
+  const deleteList = (id: string) => {
+    setLists((prev) => prev.filter((element) => element.id !== id));
   };
 
-  const editList = (newItem: IItem, id: string, category: string) => {
-    setList((prev) =>
-      prev.map((listItem) => {
-        if (listItem.category === category) {
-          const updatedList = listItem.list.map((item) => {
-            if (item.id === id) return newItem;
-            else return item;
-          });
-          return {
-            ...listItem,
-            list: updatedList,
-          };
-        }
-        return listItem;
+  const editList = (newItem: IList, id: string) => {
+    setLists((prev) =>
+      prev.map((element) => {
+        if (element.id === id) return newItem;
+        else return element;
       })
     );
   };
 
   const contextValue = {
-    list,
+    lists,
+    AllListOfCategory,
+    completedListOfCategory,
+    starListOfCategory,
     addList,
     deleteList,
     editList,

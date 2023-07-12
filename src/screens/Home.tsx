@@ -1,4 +1,4 @@
-import { dummyList } from '@src/lib/dummyList';
+import { dummyCategory, dummyList } from '@src/lib/dummyList';
 import { useContext, useState } from 'react';
 import { FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -14,19 +14,7 @@ type NProps = NativeStackScreenProps<RootParamList, 'Home'>;
 interface Props extends NProps {}
 
 export default function Home({ navigation }: Props) {
-  const listCtx = useContext(ListContext);
-
-  const onPressHandler = (
-    item: IList,
-    numberOfAll: number,
-    numberOfCompleted: number
-  ) => {
-    navigation.navigate('List', {
-      category: item.category,
-      numberOfAll,
-      numberOfCompleted,
-    });
-  };
+  const [category, setCategory] = useState(dummyCategory);
 
   return (
     <>
@@ -40,11 +28,11 @@ export default function Home({ navigation }: Props) {
       </View>
 
       <FlatList
-        data={listCtx.list}
-        keyExtractor={(item) => item.id}
+        data={category}
+        keyExtractor={(element) => element.Id}
         contentContainerStyle={{ paddingBottom: 200 }}
         renderItem={({ item }) => {
-          return <Category item={item} onPress={onPressHandler} />;
+          return <Category item={item} />;
         }}
       />
     </>

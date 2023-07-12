@@ -6,3 +6,9 @@ export interface IList {
   category: string;
   bgColor: string;
 }
+
+export interface ICategory {
+  Id: string;
+  title: string;
+  bgColor: string;
+}

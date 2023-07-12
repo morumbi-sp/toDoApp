@@ -164,13 +164,19 @@ export const dummyList_origin = [
     ],
   },
 ];
+
+export const dummyCategory = [
+  { Id: 'www', title: 'Work', bgColor: '#FFA801' },
+  { Id: 'sss', title: 'Shopping', bgColor: '#575FCF' },
+];
+
 export const dummyList = [
   {
     id: 'w01',
     contents: 'Call to Elon Musk',
     star: true,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -178,7 +184,7 @@ export const dummyList = [
     contents: 'Zoom with client',
     star: true,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -186,7 +192,7 @@ export const dummyList = [
     contents: 'Meeting with designers',
     star: true,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -194,7 +200,7 @@ export const dummyList = [
     contents: 'Lunch with Boss',
     star: false,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -202,7 +208,7 @@ export const dummyList = [
     contents: 'Submit expenses',
     star: false,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -210,7 +216,7 @@ export const dummyList = [
     contents: 'Book flight ticket',
     star: false,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -218,7 +224,7 @@ export const dummyList = [
     contents: 'Finish weekly report',
     star: false,
     complete: false,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -226,7 +232,7 @@ export const dummyList = [
     contents: 'Clean my desk',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -234,7 +240,7 @@ export const dummyList = [
     contents: 'Submit expenses',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -242,7 +248,7 @@ export const dummyList = [
     contents: 'Book flight ticket',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -250,7 +256,7 @@ export const dummyList = [
     contents: 'Finish weekly report',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -258,7 +264,7 @@ export const dummyList = [
     contents: 'Clean my desk',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -266,7 +272,7 @@ export const dummyList = [
     contents: 'Clean my desk',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -274,7 +280,7 @@ export const dummyList = [
     contents: 'Submit expenses',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -282,7 +288,7 @@ export const dummyList = [
     contents: 'Book flight ticket',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -290,7 +296,7 @@ export const dummyList = [
     contents: 'Finish weekly report',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
   {
@@ -298,7 +304,7 @@ export const dummyList = [
     contents: 'Clean my desk',
     star: false,
     complete: true,
-    category: 'Shopping',
+    category: 'Work',
     bgColor: '#FFA801',
   },
 
