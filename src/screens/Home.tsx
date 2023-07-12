@@ -19,14 +19,18 @@ export default function Home({ navigation }: Props) {
     navigation.navigate('List', { category: item });
   };
 
+  const addCategoryHandler = () => {
+    navigation.navigate('Edit', {});
+  };
+
   return (
     <>
       <View className={myStyles.topBarStyle}>
-        <Text className='text-[28px] font-bold text-gray-800 ml-4'>
+        <Text className='text-[26px] font-bold text-gray-800'>
           All Categories
         </Text>
-        <Pressable>
-          <Ionicons name='add-circle-outline' size={33} color='gray' />
+        <Pressable onPress={addCategoryHandler}>
+          <Text className='text-blue-600 font-semibold text-lg'>ADD</Text>
         </Pressable>
       </View>
 

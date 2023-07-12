@@ -8,11 +8,12 @@ import * as Device from 'expo-device';
 import ListContextProvider from '@src/context/listContext';
 import { EventProvider } from 'react-native-outside-press';
 import { ICategory } from '@src/lib/type';
+import CategoryContextProvider from '@src/context/categoryContext';
 
 export type RootParamList = {
   Home: undefined;
   List: { category: ICategory };
-  Edit: undefined;
+  Edit: { category?: ICategory };
 };
 
 const Stack = createNativeStackNavigator<RootParamList>();
@@ -21,22 +22,24 @@ export default function App() {
   return (
     <EventProvider style={{ flex: 1 }}>
       <ListContextProvider>
-        <StatusBar style='auto' />
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerShown: false,
-              contentStyle: {
-                paddingHorizontal: 12,
-                paddingVertical: Device.osName === 'iOS' ? 90 : 70,
-              },
-            }}
-          >
-            <Stack.Screen name='Home' component={Home} />
-            <Stack.Screen name='List' component={List} />
-            <Stack.Screen name='Edit' component={Edit} />
-          </Stack.Navigator>
-        </NavigationContainer>
+        <CategoryContextProvider>
+          <StatusBar style='auto' />
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerShown: false,
+                contentStyle: {
+                  paddingHorizontal: 12,
+                  paddingVertical: Device.osName === 'iOS' ? 90 : 70,
+                },
+              }}
+            >
+              <Stack.Screen name='Home' component={Home} />
+              <Stack.Screen name='List' component={List} />
+              <Stack.Screen name='Edit' component={Edit} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </CategoryContextProvider>
       </ListContextProvider>
     </EventProvider>
   );
