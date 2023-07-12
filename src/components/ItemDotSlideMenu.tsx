@@ -5,7 +5,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { IItem } from '@src/lib/type';
 import { useContext, useState } from 'react';
 import { ListContext } from '@src/context/listContext';
-import EditModal from '@src/components/EditModal';
 
 interface Props {
   themeColor: string;
@@ -31,6 +30,10 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
   const toggleStarHandler = () => {
     const newItem = { ...item, star: !item.star };
     listCtx.editList(newItem, item.id, getCategory());
+  };
+
+  const clickDeleteHandler = () => {
+    listCtx.deleteList(item.id, getCategory());
   };
 
   return (
@@ -69,7 +72,7 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
         </View>
       </Pressable>
 
-      <Pressable>
+      <Pressable onPress={clickDeleteHandler}>
         <View
           className='h-[32px] aspect-square rounded-full border-2 mr-3 '
           style={{
@@ -78,7 +81,7 @@ export default function ItemDotSlideMenu({ themeColor, item }: Props) {
           }}
         />
         <View style={{ position: 'absolute', left: 4, top: 3 }}>
-          <MaterialIcons name='mode-edit' size={24} color='white' />
+          <Ionicons name='trash' size={24} color='white' />
         </View>
       </Pressable>
     </View>

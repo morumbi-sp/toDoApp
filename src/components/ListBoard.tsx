@@ -1,14 +1,7 @@
 import ListContents from '@src/components/ListContents';
 import hexToRgb from '@src/lib/hexToRgb';
 import { LinearGradient } from 'expo-linear-gradient';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { useContext, useState } from 'react';
 import { Octicons } from '@expo/vector-icons';
 import AddItemBtn from '@src/components/AddItemBtn';
@@ -43,14 +36,6 @@ export default function ListBoard({ category }: Props) {
 
   const addItemHandler = () => {
     setAddItemMode(true);
-  };
-
-  const getCategory = (): string => {
-    const parentList = listCtx.list.find(
-      (listItem) =>
-        listItem.list.findIndex((listItem) => listItem.id === item.id) !== -1
-    );
-    return parentList?.category || '';
   };
 
   return (

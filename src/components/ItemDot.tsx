@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useContext, useState } from 'react';
 import ItemDotSlideMenu from '@src/components/ItemDotSlideMenu';
 import OutsidePressHandler from 'react-native-outside-press';
-import InputItem from '@src/components/InputItem';
 import { ListContext } from '@src/context/listContext';
 import EditItem from '@src/components/EditItem';
 
@@ -24,7 +23,7 @@ export default function ItemDot({ themeColor, item }: Props) {
   const getCategory = (): string => {
     const parentList = listCtx.list.find(
       (listItem) =>
-        listItem.list.findIndex((listItem) => listItem.id === item.id) !== -1
+        listItem.list.findIndex((listItem) => listItem.id === item?.id) !== -1
     );
     return parentList?.category || '';
   };
@@ -81,10 +80,9 @@ export default function ItemDot({ themeColor, item }: Props) {
         )}
         {item && (
           <Animated.View style={{ transform: [{ translateX: slideAnim }] }}>
-            <Pressable onPress={editItemHandler}>
+            <Pressable onPress={editItemHandler} hitSlop={{ right: 70 }}>
               {editItemMode ? (
                 <EditItem
-                  themeColor={themeColor}
                   category={getCategory()}
                   toggleAddMode={setEditItemMode}
                   item={item}

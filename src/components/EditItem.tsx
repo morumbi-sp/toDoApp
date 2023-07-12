@@ -1,22 +1,15 @@
-import ItemDot from '@src/components/ItemDot';
 import { ListContext } from '@src/context/listContext';
 import { IItem } from '@src/lib/type';
 import { useContext, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 
 interface Props {
-  themeColor: string;
   category: string;
   toggleAddMode: (prevState: boolean) => void;
   item: IItem;
 }
 
-export default function EditItem({
-  themeColor,
-  category,
-  item,
-  toggleAddMode,
-}: Props) {
+export default function EditItem({ category, item, toggleAddMode }: Props) {
   const inputRef = useRef<TextInput>(null);
   const [inputValues, setInputValues] = useState(item?.contents);
   const listCtx = useContext(ListContext);

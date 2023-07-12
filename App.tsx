@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '@src/screens/Home';
 import List from '@src/screens/List';
 import Edit from '@src/screens/Edit';
-import { IList } from '@src/lib/type';
 import * as Device from 'expo-device';
 import ListContextProvider from '@src/context/listContext';
 import { EventProvider } from 'react-native-outside-press';

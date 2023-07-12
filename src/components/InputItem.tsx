@@ -1,6 +1,5 @@
 import ItemDot from '@src/components/ItemDot';
 import { ListContext } from '@src/context/listContext';
-import { IItem } from '@src/lib/type';
 import { useContext, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import uuid from 'react-native-uuid';
@@ -14,7 +13,6 @@ interface Props {
 export default function InputItem({
   themeColor,
   category,
-
   toggleAddMode,
 }: Props) {
   const inputRef = useRef<TextInput>(null);
