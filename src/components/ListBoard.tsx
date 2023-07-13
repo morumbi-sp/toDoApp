@@ -20,10 +20,11 @@ export default function ListBoard({ categoryId }: Props) {
   const [addItemMode, setAddItemMode] = useState(false);
   const categoryCtx = useContext(CategoryContext);
 
-  const category =
-    categoryCtx.categories.find((element) => element.Id === categoryId) || {};
+  const category = categoryCtx.categories.find(
+    (element) => element.Id === categoryId
+  ) || { Id: 'none', title: 'none', bgColor: '#FFC048' };
 
-  const boardBgColor = `rgba(${hexToRgb(category.bgColor)}, 0.15)`;
+  const boardBgColor = category && `rgba(${hexToRgb(category.bgColor)}, 0.15)`;
 
   const listCtx = useContext(ListContext);
 

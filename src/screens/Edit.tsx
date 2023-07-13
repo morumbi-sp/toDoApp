@@ -5,7 +5,7 @@ import hexToRgb from '@src/lib/hexToRgb';
 import { RootParamList } from 'App';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useContext, useRef, useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { Alert, Pressable, Text, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { CategoryContext } from '@src/context/categoryContext';
 import uuid from 'react-native-uuid';
@@ -54,16 +54,50 @@ export default function Edit({ navigation, route }: Props) {
         });
       } else {
         categoryCtx.addCategory(newItem);
+        navigation.goBack();
       }
     }
   };
 
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Category',
+      'the category will be deleted, and all the items within the category will be removed.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            listCtx
+              .AllListOfCategory(params?.category?.title!)
+              .map((element) => {
+                listCtx.deleteList(element.id);
+              });
+            categoryCtx.deleteCategory(params.category?.Id!);
+            navigation.navigate('Home');
+          },
+        },
+      ]
+    );
+  };
+
   return (
     <>
-      <View className='items-center mb-4'>
+      <View className='mx-2 mb-4 flex-row justify-between items-center'>
         <Text className='text-xl font-semibold'>
           {params.category ? 'Edit' : 'Create'} Category
         </Text>
+        {params.category && (
+          <Pressable
+            className='bg-red-500 py-1 px-3 rounded-full'
+            onPress={handleDelete}
+          >
+            <Text className='text-[16px] font-semibold text-white'>DELETE</Text>
+          </Pressable>
+        )}
       </View>
       <LinearGradient
         colors={[bgColor, boardBgColor]}
