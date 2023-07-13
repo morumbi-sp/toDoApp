@@ -11,7 +11,6 @@ export default function TaskDots({ category }: Props) {
   const allList = listCtx.AllListOfCategory(category);
   const completedList = listCtx.completedListOfCategory(category);
 
-  console.log(JSON.stringify(listCtx.lists, null, 2));
   return (
     <View>
       <View className='flex-row items-end'>

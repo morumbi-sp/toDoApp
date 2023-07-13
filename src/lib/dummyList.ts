@@ -1,6 +1,6 @@
 export const dummyCategory = [
-  { Id: 'www', title: 'Work', bgColor: '#FFA801' },
-  { Id: 'sss', title: 'Shopping', bgColor: '#575FCF' },
+  { Id: 'work_default', title: 'Work', bgColor: '#FFA801' },
+  { Id: 'personal_default', title: 'Personal', bgColor: '#575FCF' },
 ];
 
 export const dummyList = [
