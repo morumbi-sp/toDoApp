@@ -1,5 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { dummyList } from '@src/lib/dummyList';
 import { IList } from '@src/lib/type';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
@@ -28,7 +27,6 @@ export const ListContext = createContext<IListContext>({
 });
 
 export default function ListContextProvider({ children }: Props) {
-  // const [lists, setLists] = useState(dummyList);
   const [lists, setLists] = useState<IList[]>([]);
 
   const AllListOfCategory = (category: string) =>
