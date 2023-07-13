@@ -2,6 +2,8 @@
 * 텍스트 에이트 클릭 범위 우측으로 확장 ✅
 * slide menu에서 에디트를 딜리트로 교체 ✅
 * DB 구조 변경 리팩토링 ✅
-* Add Category 구현 
-* Edit Category 구현
+* Add Category 구현 ✅
+* Edit Category 구현✅
+* 스토리지 연결
+* Category 순서변경 기능
 

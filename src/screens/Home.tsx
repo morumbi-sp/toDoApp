@@ -1,11 +1,8 @@
-import { dummyCategory, dummyList } from '@src/lib/dummyList';
-import { useContext, useState } from 'react';
-import { FlatList, Pressable, SafeAreaView, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { useContext } from 'react';
+import { FlatList, Pressable, Text, View } from 'react-native';
 import Category from '@src/components/Category';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootParamList } from 'App';
-import { ICategory, IList } from '@src/lib/type';
 import { myStyles } from '@src/lib/myStyles';
 import { CategoryContext } from '@src/context/categoryContext';
 

@@ -1,6 +1,6 @@
 import TaskDots from '@src/components/TaskDots';
-import { ICategory, IList } from '@src/lib/type';
-import { Pressable, Text, View } from 'react-native';
+import { ICategory } from '@src/lib/type';
+import { Text, View } from 'react-native';
 
 interface Props {
   item: ICategory;

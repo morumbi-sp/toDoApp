@@ -16,7 +16,7 @@ export default function TaskDots({ category }: Props) {
     <View>
       <View className='flex-row items-end'>
         <Text className='text-[22px] font-semibold text-white'>
-          {completedList.length} / {allList.length}
+          {completedList.length || 0} / {allList.length || 0}
         </Text>
         <Text className='ml-2 text-[16px] mb-[2px] text-white font-semibold'>
           tasks

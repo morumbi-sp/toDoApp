@@ -1,7 +1,6 @@
 import { dummyCategory, dummyList } from '@src/lib/dummyList';
 import { ICategory } from '@src/lib/type';
 import { ReactNode, createContext, useState } from 'react';
-import { Text, View } from 'react-native';
 
 interface Props {
   children: ReactNode;

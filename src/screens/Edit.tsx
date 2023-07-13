@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import Category from '@src/components/Category';
 import { bgColors } from '@src/lib/bgColors';
 import hexToRgb from '@src/lib/hexToRgb';
 import { RootParamList } from 'App';

@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 
 interface Props {

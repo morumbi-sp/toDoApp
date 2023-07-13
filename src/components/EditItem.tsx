@@ -1,7 +1,7 @@
 import { ListContext } from '@src/context/listContext';
 import { IList } from '@src/lib/type';
 import { useContext, useRef, useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { TextInput } from 'react-native';
 
 interface Props {
   toggleAddMode: (prevState: boolean) => void;

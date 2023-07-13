@@ -23,10 +23,14 @@ export default function List({ navigation, route }: Props) {
     navigation.navigate('Edit', { category });
   };
   return (
-    <View className='mb-[120px]'>
+    <View className='mb-[100px]'>
       <View className={myStyles.topBarStyle}>
-        <Pressable onPress={navigation.goBack}>
+        <Pressable
+          onPress={navigation.goBack}
+          className='flex-row items-center'
+        >
           <Ionicons name='arrow-back' size={28} color='black' />
+          <Text className='font-semibold text-xl ml-2'>Home</Text>
         </Pressable>
         <Pressable onPress={editCategoryHandler}>
           <Text className='text-blue-600 font-semibold text-lg'>EDIT</Text>

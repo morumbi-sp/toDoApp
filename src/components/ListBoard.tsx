@@ -8,7 +8,6 @@ import AddItemBtn from '@src/components/AddItemBtn';
 import InputItem from '@src/components/InputItem';
 import { ListContext } from '@src/context/listContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { ICategory } from '@src/lib/type';
 import { CategoryContext } from '@src/context/categoryContext';
 
 interface Props {
