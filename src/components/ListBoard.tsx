@@ -52,7 +52,7 @@ export default function ListBoard({ categoryId }: Props) {
       colors={[category.bgColor, boardBgColor]}
       start={{ x: 0.5, y: 0.03 }}
       end={{ x: 0.5, y: 0.3 }}
-      className='h-full rounded-2xl shadow-md pt-7 px-5 bg-white'
+      className='h-full rounded-2xl shadow-md pt-5 px-5 bg-white'
     >
       <View className='ml-[4px] mb-5'>
         <Text className='text-[38px] font-bold text-white'>

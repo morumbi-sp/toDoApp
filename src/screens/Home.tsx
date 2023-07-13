@@ -28,7 +28,7 @@ export default function Home({ navigation }: Props) {
   return (
     <>
       <View className={myStyles.topBarStyle}>
-        <Text className='text-[26px] font-bold text-gray-800'>
+        <Text className='text-[22px] font-bold text-gray-800'>
           All Categories
         </Text>
         <Pressable onPress={addCategoryHandler}>

@@ -9,12 +9,12 @@ interface Props {
 export default function Category({ item }: Props) {
   return (
     <View
-      className='h-[200px] mb-5 rounded-xl shadow-sm shadow-gray-400 p-5 justify-between'
+      className='h-[190px] mb-5 rounded-xl shadow-sm shadow-gray-400 p-5 justify-between'
       style={{
         backgroundColor: item.bgColor,
       }}
     >
-      <Text className='text-[38px] font-semibold text-white '>
+      <Text className='text-[30px] font-semibold text-white '>
         {item.title}
       </Text>
       <TaskDots category={item.title} />

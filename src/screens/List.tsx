@@ -23,7 +23,7 @@ export default function List({ navigation, route }: Props) {
     navigation.navigate('Edit', { category });
   };
   return (
-    <>
+    <View className='mb-[120px]'>
       <View className={myStyles.topBarStyle}>
         <Pressable onPress={navigation.goBack}>
           <Ionicons name='arrow-back' size={28} color='black' />
@@ -33,6 +33,6 @@ export default function List({ navigation, route }: Props) {
         </Pressable>
       </View>
       <ListBoard categoryId={categoryId} />
-    </>
+    </View>
   );
 }
