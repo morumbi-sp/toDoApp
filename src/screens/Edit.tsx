@@ -4,9 +4,12 @@ import { bgColors } from '@src/lib/bgColors';
 import hexToRgb from '@src/lib/hexToRgb';
 import { RootParamList } from 'App';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { CategoryContext } from '@src/context/categoryContext';
+import uuid from 'react-native-uuid';
+import { ListContext } from '@src/context/listContext';
 
 type NProps = NativeStackScreenProps<RootParamList, 'Edit'>;
 
@@ -21,6 +24,8 @@ const getRandomColor = () => {
 
 export default function Edit({ navigation, route }: Props) {
   const inputRef = useRef<TextInput>(null);
+  const listCtx = useContext(ListContext);
+  const categoryCtx = useContext(CategoryContext);
   const params = route.params;
   const [bgColor, setBgColor] = useState(
     params.category?.bgColor || getRandomColor()
@@ -29,7 +34,28 @@ export default function Edit({ navigation, route }: Props) {
 
   const boardBgColor = `rgba(${hexToRgb(bgColor)}, 0.15)`;
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    if (inputText?.trim().length === 0 || inputText === undefined) {
+      navigation.goBack();
+    } else {
+      const newItem = {
+        Id: params?.category?.Id || String(uuid.v4()),
+        title: inputText,
+        bgColor,
+      };
+
+      if (params?.category?.Id) {
+        categoryCtx.editCategory(newItem, params.category?.Id);
+        listCtx.AllListOfCategory(params?.category?.title).map((element) => {
+          const newItem = { ...element, category: inputText, bgColor };
+          listCtx.editList(newItem, element.id);
+          navigation.navigate('List', { category: params.category! });
+        });
+      } else {
+        categoryCtx.addCategory(newItem);
+      }
+    }
+  };
 
   return (
     <>

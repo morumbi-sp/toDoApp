@@ -7,13 +7,15 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootParamList } from 'App';
 import { ICategory, IList } from '@src/lib/type';
 import { myStyles } from '@src/lib/myStyles';
+import { CategoryContext } from '@src/context/categoryContext';
 
 type NProps = NativeStackScreenProps<RootParamList, 'Home'>;
 
 interface Props extends NProps {}
 
 export default function Home({ navigation }: Props) {
-  const [category, setCategory] = useState(dummyCategory);
+  const categoryCtx = useContext(CategoryContext);
+  const category = categoryCtx.categories;
 
   const onPressHandler = (item: ICategory) => {
     navigation.navigate('List', { category: item });
