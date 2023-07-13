@@ -17,8 +17,8 @@ export default function Home({ navigation }: Props) {
   const categoryCtx = useContext(CategoryContext);
   const category = categoryCtx.categories;
 
-  const onPressHandler = (item: ICategory) => {
-    navigation.navigate('List', { category: item });
+  const onPressHandler = (id: string) => {
+    navigation.navigate('List', { categoryId: id });
   };
 
   const addCategoryHandler = () => {
@@ -42,7 +42,11 @@ export default function Home({ navigation }: Props) {
         contentContainerStyle={{ paddingBottom: 200 }}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
-          return <Category item={item} onPress={() => onPressHandler(item)} />;
+          return (
+            <Pressable onPress={() => onPressHandler(item.Id)}>
+              <Category item={item} />
+            </Pressable>
+          );
         }}
       />
     </>

@@ -4,13 +4,21 @@ import { RootParamList } from 'App';
 import { Ionicons } from '@expo/vector-icons';
 import { myStyles } from '@src/lib/myStyles';
 import ListBoard from '@src/components/ListBoard';
+import { useContext } from 'react';
+import { CategoryContext } from '@src/context/categoryContext';
 
 type NProps = NativeStackScreenProps<RootParamList, 'List'>;
 
 interface Props extends NProps {}
 
 export default function List({ navigation, route }: Props) {
-  const { category } = route.params;
+  const { categoryId } = route.params;
+  const categoryCtx = useContext(CategoryContext);
+
+  const category = categoryCtx.categories.find(
+    (element) => element.Id === categoryId
+  );
+
   const editCategoryHandler = () => {
     navigation.navigate('Edit', { category });
   };
@@ -24,7 +32,7 @@ export default function List({ navigation, route }: Props) {
           <Text className='text-blue-600 font-semibold text-lg'>EDIT</Text>
         </Pressable>
       </View>
-      <ListBoard category={category} />
+      <ListBoard categoryId={categoryId} />
     </>
   );
 }

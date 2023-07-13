@@ -26,6 +26,7 @@ export default function Edit({ navigation, route }: Props) {
   const inputRef = useRef<TextInput>(null);
   const listCtx = useContext(ListContext);
   const categoryCtx = useContext(CategoryContext);
+
   const params = route.params;
   const [bgColor, setBgColor] = useState(
     params.category?.bgColor || getRandomColor()
@@ -49,7 +50,7 @@ export default function Edit({ navigation, route }: Props) {
         listCtx.AllListOfCategory(params?.category?.title).map((element) => {
           const newItem = { ...element, category: inputText, bgColor };
           listCtx.editList(newItem, element.id);
-          navigation.navigate('List', { category: params.category! });
+          navigation.navigate('List', { categoryId: params.category!.Id });
         });
       } else {
         categoryCtx.addCategory(newItem);

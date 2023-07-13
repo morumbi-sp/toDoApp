@@ -12,7 +12,7 @@ import CategoryContextProvider from '@src/context/categoryContext';
 
 export type RootParamList = {
   Home: undefined;
-  List: { category: ICategory };
+  List: { categoryId: string };
   Edit: { category?: ICategory };
 };
 

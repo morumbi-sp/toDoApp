@@ -9,14 +9,19 @@ import InputItem from '@src/components/InputItem';
 import { ListContext } from '@src/context/listContext';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ICategory } from '@src/lib/type';
+import { CategoryContext } from '@src/context/categoryContext';
 
 interface Props {
-  category: ICategory;
+  categoryId: string;
 }
 
-export default function ListBoard({ category }: Props) {
+export default function ListBoard({ categoryId }: Props) {
   const [showCompleted, setShowCompleted] = useState(true);
   const [addItemMode, setAddItemMode] = useState(false);
+  const categoryCtx = useContext(CategoryContext);
+
+  const category =
+    categoryCtx.categories.find((element) => element.Id === categoryId) || {};
 
   const boardBgColor = `rgba(${hexToRgb(category.bgColor)}, 0.15)`;
 
