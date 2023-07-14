@@ -1,10 +1,13 @@
 import { useContext } from 'react';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import Category from '@src/components/Category';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootParamList } from 'App';
 import { myStyles } from '@src/lib/myStyles';
 import { CategoryContext } from '@src/context/categoryContext';
+import DraggableFlatList, {
+  ScaleDecorator,
+} from 'react-native-draggable-flatlist';
 
 type NProps = NativeStackScreenProps<RootParamList, 'Home'>;
 
@@ -35,16 +38,26 @@ export default function Home({ navigation }: Props) {
         </Pressable>
       </View>
 
-      <FlatList
+      <DraggableFlatList
         data={category}
-        keyExtractor={(element) => element.Id}
+        keyExtractor={(item) => item.Id}
+        onDragEnd={({ data }) => {
+          categoryCtx.reorderCategory(data);
+          console.log(data);
+        }}
         contentContainerStyle={{ paddingBottom: 200 }}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => {
+        renderItem={({ item, drag, isActive }) => {
           return (
-            <Pressable onPress={() => onPressHandler(item.Id)}>
-              <Category item={item} />
-            </Pressable>
+            <ScaleDecorator>
+              <Pressable
+                onLongPress={drag}
+                disabled={isActive}
+                onPress={() => onPressHandler(item.Id)}
+              >
+                <Category item={item} />
+              </Pressable>
+            </ScaleDecorator>
           );
         }}
       />

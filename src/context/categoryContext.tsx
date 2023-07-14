@@ -1,7 +1,5 @@
-import { dummyCategory, dummyList } from '@src/lib/dummyList';
 import { ICategory } from '@src/lib/type';
 import { ReactNode, createContext, useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getData, removeValue, storeData } from '@src/lib/asyncStorage';
 
 interface Props {
@@ -13,6 +11,7 @@ interface ICategoryContext {
   addCategory: (newItem: ICategory) => void;
   deleteCategory: (id: string) => void;
   editCategory: (newItem: ICategory, id: string) => void;
+  reorderCategory: (newOrderedCategory: ICategory[]) => void;
 }
 
 export const CategoryContext = createContext<ICategoryContext>({
@@ -20,6 +19,7 @@ export const CategoryContext = createContext<ICategoryContext>({
   addCategory: () => {},
   deleteCategory: () => {},
   editCategory: () => {},
+  reorderCategory: () => {},
 });
 
 export default function CategoryContextProvider({ children }: Props) {
@@ -44,6 +44,11 @@ export default function CategoryContextProvider({ children }: Props) {
     );
   };
 
+  const reorderCategory = (newOrderedCategory: ICategory[]) => {
+    console.log('reorder');
+    setCategories(newOrderedCategory);
+  };
+
   useEffect(() => {
     (async () => {
       // removeValue('my-category');
@@ -62,6 +67,7 @@ export default function CategoryContextProvider({ children }: Props) {
     addCategory,
     deleteCategory,
     editCategory,
+    reorderCategory,
   };
 
   return (

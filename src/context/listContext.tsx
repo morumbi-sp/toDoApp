@@ -1,5 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getData, removeValue, storeData } from '@src/lib/asyncStorage';
+import { getData, storeData } from '@src/lib/asyncStorage';
 import { IList } from '@src/lib/type';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
