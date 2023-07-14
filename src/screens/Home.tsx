@@ -8,6 +8,8 @@ import { CategoryContext } from '@src/context/categoryContext';
 import DraggableFlatList, {
   ScaleDecorator,
 } from 'react-native-draggable-flatlist';
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 type NProps = NativeStackScreenProps<RootParamList, 'Home'>;
 
@@ -37,31 +39,32 @@ export default function Home({ navigation }: Props) {
           <Text className='text-blue-600 font-semibold text-lg'>ADD</Text>
         </Pressable>
       </View>
-
-      <DraggableFlatList
-        data={category}
-        keyExtractor={(item) => item.Id}
-        onDragEnd={({ data }) => {
-          categoryCtx.reorderCategory(data);
-          console.log(data);
-        }}
-        contentContainerStyle={{ paddingBottom: 200 }}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item, drag, isActive }) => {
-          return (
-            <ScaleDecorator>
-              <Pressable
-                onLongPress={drag}
-                disabled={isActive}
-                onPress={() => onPressHandler(item.Id)}
-                className='px-[18px]'
-              >
-                <Category item={item} />
-              </Pressable>
-            </ScaleDecorator>
-          );
-        }}
-      />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <DraggableFlatList
+          data={category}
+          keyExtractor={(item) => item.Id}
+          onDragEnd={({ data }) => {
+            categoryCtx.reorderCategory(data);
+            console.log(data);
+          }}
+          contentContainerStyle={{ paddingBottom: 200 }}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, drag, isActive }) => {
+            return (
+              <ScaleDecorator>
+                <Pressable
+                  onLongPress={drag}
+                  disabled={isActive}
+                  onPress={() => onPressHandler(item.Id)}
+                  className='px-[18px]'
+                >
+                  <Category item={item} />
+                </Pressable>
+              </ScaleDecorator>
+            );
+          }}
+        />
+      </GestureHandlerRootView>
     </>
   );
 }

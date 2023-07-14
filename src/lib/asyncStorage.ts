@@ -17,11 +17,10 @@ export const storeData = async (
 export const getData = async (key: keyType) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
-    return jsonValue != 'null'
+
+    return JSON.parse(jsonValue!) != null
       ? JSON.parse(jsonValue!)
-      : key === 'my-category'
-      ? dummyCategory
-      : [];
+      : dummyCategory;
   } catch (e) {}
 };
 
