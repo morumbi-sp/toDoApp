@@ -46,6 +46,8 @@ export default function ListBoard({ categoryId }: Props) {
     setAddItemMode(true);
   };
 
+  console.log(JSON.stringify(listCtx.lists, null, 2));
+
   return (
     <LinearGradient
       colors={[category.bgColor, boardBgColor]}

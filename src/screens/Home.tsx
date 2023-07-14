@@ -22,6 +22,8 @@ export default function Home({ navigation }: Props) {
     navigation.navigate('Edit', {});
   };
 
+  console.log(JSON.stringify(category, null, 2));
+
   return (
     <>
       <View className={myStyles.topBarStyle}>

@@ -22,6 +22,7 @@ export default function List({ navigation, route }: Props) {
   const editCategoryHandler = () => {
     navigation.navigate('Edit', { category });
   };
+
   return (
     <View className='mb-[100px]'>
       <View className={myStyles.topBarStyle}>

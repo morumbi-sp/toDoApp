@@ -22,9 +22,11 @@ export const CategoryContext = createContext<ICategoryContext>({
 });
 
 export default function CategoryContextProvider({ children }: Props) {
-  const [categories, setCategories] = useState<ICategory[]>();
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
   const addCategory = (newItem: ICategory) => {
+    console.log(newItem);
+    console.log(categories);
     setCategories((prev) => [...prev, newItem]);
   };
 
@@ -48,20 +50,35 @@ export default function CategoryContextProvider({ children }: Props) {
     } catch (e) {}
   };
 
+  const removeValue = async () => {
+    try {
+      await AsyncStorage.removeItem('my-category');
+    } catch (e) {
+      // remove error
+    }
+    console.log('Done.');
+  };
+
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('my-category');
-      setCategories(jsonValue != null ? JSON.parse(jsonValue) : null);
+      console.log(JSON.stringify(jsonValue, null, 2));
+      setCategories(
+        jsonValue != 'null' ? JSON.parse(jsonValue!) : dummyCategory
+      );
     } catch (e) {}
   };
 
   useEffect(() => {
+    // removeValue();
     getData();
   }, []);
 
   useEffect(() => {
     storeData(categories);
   }, [setCategories, addCategory, deleteCategory, editCategory]);
+
+  console.log(JSON.stringify(categories, null, 2));
 
   const contextValue = {
     categories,
