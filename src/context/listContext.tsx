@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getData, removeValue, storeData } from '@src/lib/asyncStorage';
 import { IList } from '@src/lib/type';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 
@@ -56,26 +57,15 @@ export default function ListContextProvider({ children }: Props) {
     );
   };
 
-  const storeData = async (toSave: IList[]) => {
-    try {
-      const jsonValue = JSON.stringify(toSave);
-      await AsyncStorage.setItem('my-list', jsonValue);
-    } catch (e) {}
-  };
-
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('my-list');
-      setLists(jsonValue != null ? JSON.parse(jsonValue) : null);
-    } catch (e) {}
-  };
-
   useEffect(() => {
-    getData();
+    (async () => {
+      // removeValue('my-list');
+      setLists(await getData('my-list'));
+    })();
   }, []);
 
   useEffect(() => {
-    storeData(lists);
+    storeData(lists, 'my-list');
   }, [setLists, addList, deleteList, editList]);
 
   const contextValue = {

@@ -2,6 +2,7 @@ import { dummyCategory, dummyList } from '@src/lib/dummyList';
 import { ICategory } from '@src/lib/type';
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getData, removeValue, storeData } from '@src/lib/asyncStorage';
 
 interface Props {
   children: ReactNode;
@@ -43,39 +44,15 @@ export default function CategoryContextProvider({ children }: Props) {
     );
   };
 
-  const storeData = async (toSave: ICategory[]) => {
-    try {
-      const jsonValue = JSON.stringify(toSave);
-      await AsyncStorage.setItem('my-category', jsonValue);
-    } catch (e) {}
-  };
-
-  const removeValue = async () => {
-    try {
-      await AsyncStorage.removeItem('my-category');
-    } catch (e) {
-      // remove error
-    }
-    console.log('Done.');
-  };
-
-  const getData = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem('my-category');
-      console.log(JSON.stringify(jsonValue, null, 2));
-      setCategories(
-        jsonValue != 'null' ? JSON.parse(jsonValue!) : dummyCategory
-      );
-    } catch (e) {}
-  };
-
   useEffect(() => {
-    // removeValue();
-    getData();
+    (async () => {
+      // removeValue('my-category');
+      setCategories(await getData('my-category'));
+    })();
   }, []);
 
   useEffect(() => {
-    storeData(categories);
+    storeData(categories, 'my-category');
   }, [setCategories, addCategory, deleteCategory, editCategory]);
 
   console.log(JSON.stringify(categories, null, 2));
