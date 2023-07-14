@@ -49,8 +49,8 @@ export default function Edit({ navigation, route }: Props) {
         listCtx.AllListOfCategory(params?.category?.title).map((element) => {
           const newItem = { ...element, category: inputText, bgColor };
           listCtx.editList(newItem, element.id);
-          navigation.navigate('List', { categoryId: params.category!.Id });
         });
+        navigation.navigate('List', { categoryId: params.category!.Id });
       } else {
         categoryCtx.addCategory(newItem);
         navigation.goBack();
@@ -84,7 +84,7 @@ export default function Edit({ navigation, route }: Props) {
   };
 
   return (
-    <>
+    <View className='px-3'>
       <View className='mx-2 mb-4 flex-row justify-between items-center'>
         <Text className='text-xl font-semibold'>
           {params.category ? 'Edit' : 'Create'} Category
@@ -164,6 +164,6 @@ export default function Edit({ navigation, route }: Props) {
           </Pressable>
         </View>
       </LinearGradient>
-    </>
+    </View>
   );
 }

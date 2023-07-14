@@ -29,7 +29,7 @@ export default function App() {
               screenOptions={{
                 headerShown: false,
                 contentStyle: {
-                  paddingHorizontal: 13,
+                  // paddingHorizontal: 13,
                   paddingTop: Device.osName === 'iOS' ? 70 : 50,
                   paddingBottom: 24,
                 },

@@ -54,6 +54,7 @@ export default function Home({ navigation }: Props) {
                 onLongPress={drag}
                 disabled={isActive}
                 onPress={() => onPressHandler(item.Id)}
+                className='px-[18px]'
               >
                 <Category item={item} />
               </Pressable>

@@ -26,8 +26,6 @@ export default function CategoryContextProvider({ children }: Props) {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   const addCategory = (newItem: ICategory) => {
-    console.log(newItem);
-    console.log(categories);
     setCategories((prev) => [...prev, newItem]);
   };
 
@@ -36,6 +34,7 @@ export default function CategoryContextProvider({ children }: Props) {
   };
 
   const editCategory = (newItem: ICategory, id: string) => {
+    console.log(categories);
     setCategories((prev) =>
       prev.map((element) => {
         if (element.Id === id) return newItem;
@@ -59,8 +58,6 @@ export default function CategoryContextProvider({ children }: Props) {
   useEffect(() => {
     storeData(categories, 'my-category');
   }, [setCategories, addCategory, deleteCategory, editCategory]);
-
-  console.log(JSON.stringify(categories, null, 2));
 
   const contextValue = {
     categories,

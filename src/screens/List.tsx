@@ -24,7 +24,7 @@ export default function List({ navigation, route }: Props) {
   };
 
   return (
-    <View className='mb-[100px]'>
+    <View className='mb-[100px] px-3'>
       <View className={myStyles.topBarStyle}>
         <Pressable
           onPress={navigation.goBack}
