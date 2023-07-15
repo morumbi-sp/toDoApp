@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { IList } from '@src/lib/type';
 import { useContext } from 'react';
 import { ListContext } from '@src/context/listContext';
+import { MaterialIcons } from '@expo/vector-icons';
 
 interface Props {
   item: IList;
@@ -18,7 +19,7 @@ export default function ItemDotSlideMenu({ item }: Props) {
   };
 
   const toggleStarHandler = () => {
-    const newItem = { ...item, star: !item.star };
+    const newItem = { ...item, star: !item.star, complete: false };
     listCtx.editList(newItem, item.id);
   };
 
@@ -27,8 +28,8 @@ export default function ItemDotSlideMenu({ item }: Props) {
   };
 
   return (
-    <View className='flex-row -ml-[40px]'>
-      <Pressable className='mr-[15px]' onPress={toggleCompletedHandler}>
+    <View className='flex-row mt-3 justify-center w-full mb-3'>
+      <Pressable className='mr-[30px]' onPress={toggleCompletedHandler}>
         <View
           className='h-[33px] aspect-square rounded-full border-2 mr-3 '
           style={{
@@ -46,7 +47,7 @@ export default function ItemDotSlideMenu({ item }: Props) {
         )}
       </Pressable>
 
-      <Pressable className='mr-[15px]' onPress={toggleStarHandler}>
+      <Pressable className='mr-[30px]' onPress={toggleStarHandler}>
         <View
           className='h-[32px] aspect-square rounded-full border-2 mr-3 '
           style={{
@@ -64,7 +65,7 @@ export default function ItemDotSlideMenu({ item }: Props) {
 
       <Pressable onPress={clickDeleteHandler}>
         <View
-          className='h-[32px] aspect-square rounded-full border-2 mr-3 '
+          className='h-[32px] aspect-square rounded-full border-2'
           style={{
             borderColor: item.bgColor,
             backgroundColor: item.bgColor,
