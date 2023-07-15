@@ -90,11 +90,15 @@ export default function ListBoard({ categoryId }: Props) {
           <Text className='text-[12px] text-gray-700'>
             COMPLETED ({numberOfCompleted})
           </Text>
-          <Pressable onPress={toggleShowCompleted} className='mr-5'>
+          <Pressable
+            onPress={toggleShowCompleted}
+            hitSlop={{ bottom: 10, left: 10, right: 10, top: 10 }}
+            className='mr-5'
+          >
             {showCompleted ? (
-              <Octicons name='chevron-down' size={22} color='gray' />
+              <Octicons name='chevron-down' size={24} color='gray' />
             ) : (
-              <Octicons name='chevron-left' size={22} color='gray' />
+              <Octicons name='chevron-left' size={24} color='gray' />
             )}
           </Pressable>
         </View>

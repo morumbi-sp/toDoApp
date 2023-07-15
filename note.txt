@@ -10,6 +10,6 @@
 * Category 순서변경 기능 ✅
 * dots 30개 넘어가면 그래프화 ✅
 * slide menu 아래로 펼쳐지게 수정 ✅
-* completed 리스트 Pressable 범위 확장
+* completed 리스트 Pressable 범위 확장 ✅
 * List 순서변경 기능
 

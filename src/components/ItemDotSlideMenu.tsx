@@ -4,7 +4,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { IList } from '@src/lib/type';
 import { useContext } from 'react';
 import { ListContext } from '@src/context/listContext';
-import { MaterialIcons } from '@expo/vector-icons';
 
 interface Props {
   item: IList;
