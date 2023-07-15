@@ -34,7 +34,6 @@ export default function CategoryContextProvider({ children }: Props) {
   };
 
   const editCategory = (newItem: ICategory, id: string) => {
-    console.log(categories);
     setCategories((prev) =>
       prev.map((element) => {
         if (element.Id === id) return newItem;
@@ -44,7 +43,6 @@ export default function CategoryContextProvider({ children }: Props) {
   };
 
   const reorderCategory = (newOrderedCategory: ICategory[]) => {
-    console.log('reorder');
     setCategories(newOrderedCategory);
   };
 

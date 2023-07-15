@@ -27,8 +27,6 @@ export default function Home({ navigation }: Props) {
     navigation.navigate('Edit', {});
   };
 
-  console.log(JSON.stringify(category, null, 2));
-
   return (
     <>
       <View className={myStyles.topBarStyle}>
@@ -45,7 +43,6 @@ export default function Home({ navigation }: Props) {
           keyExtractor={(item) => item.Id}
           onDragEnd={({ data }) => {
             categoryCtx.reorderCategory(data);
-            console.log(data);
           }}
           contentContainerStyle={{ paddingBottom: 200 }}
           showsVerticalScrollIndicator={false}
