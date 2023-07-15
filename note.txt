@@ -8,7 +8,7 @@
 * category 기본 2개 설정 ✅
 * AsyncStorage 파일화 ✅
 * Category 순서변경 기능 ✅
-* dots 20개 넘어가면 그래프화
+* dots 30개 넘어가면 그래프화 ✅
 * slide menu 아래로 펼쳐지게 수정
 * completed 리스트 Pressable 범위 확장
 * List 순서변경 기능
