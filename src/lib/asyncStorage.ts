@@ -21,7 +21,9 @@ export const getData = async (key: keyType) => {
     return JSON.parse(jsonValue!) != null
       ? JSON.parse(jsonValue!)
       : dummyCategory;
-  } catch (e) {}
+  } catch (e) {
+    console.log('getData Error!');
+  }
 };
 
 export const removeValue = async (key: keyType) => {

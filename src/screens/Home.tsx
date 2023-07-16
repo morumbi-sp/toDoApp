@@ -40,7 +40,7 @@ export default function Home({ navigation }: Props) {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <DraggableFlatList
           data={category}
-          keyExtractor={(item) => item.Id}
+          keyExtractor={(item) => item?.Id}
           onDragEnd={({ data }) => {
             categoryCtx.reorderCategory(data);
           }}
