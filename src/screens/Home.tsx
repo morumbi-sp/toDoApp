@@ -29,7 +29,7 @@ export default function Home({ navigation }: Props) {
 
   return (
     <>
-      <View className={myStyles.topBarStyle}>
+      <View className='flex-row mb-4 justify-between items-center mx-5'>
         <Text className='text-[22px] font-bold text-gray-800'>
           All Categories
         </Text>
